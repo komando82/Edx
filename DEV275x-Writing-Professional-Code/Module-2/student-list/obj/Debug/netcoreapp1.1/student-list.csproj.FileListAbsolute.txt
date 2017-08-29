@@ -1,0 +1,8 @@
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/bin/Debug/netcoreapp1.1/student-list.deps.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/bin/Debug/netcoreapp1.1/student-list.runtimeconfig.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/bin/Debug/netcoreapp1.1/student-list.runtimeconfig.dev.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/bin/Debug/netcoreapp1.1/student-list.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/bin/Debug/netcoreapp1.1/student-list.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/obj/Debug/netcoreapp1.1/student-list.AssemblyInfo.cs
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/obj/Debug/netcoreapp1.1/student-list.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-2/student-list/obj/Debug/netcoreapp1.1/student-list.pdb
