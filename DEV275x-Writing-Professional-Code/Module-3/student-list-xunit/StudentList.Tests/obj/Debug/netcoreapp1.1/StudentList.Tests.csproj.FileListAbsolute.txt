@@ -1,0 +1,13 @@
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/xunit.runner.utility.netstandard15.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/xunit.runner.reporters.netstandard15.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Tests.deps.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Tests.runtimeconfig.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Tests.runtimeconfig.dev.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Tests.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Tests.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Services.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/bin/Debug/netcoreapp1.1/StudentList.Services.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/obj/Debug/netcoreapp1.1/StudentList.Tests.AssemblyInfo.cs
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/obj/Debug/netcoreapp1.1/StudentList.Tests.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Tests/obj/Debug/netcoreapp1.1/StudentList.Tests.pdb

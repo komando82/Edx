@@ -1,0 +1,10 @@
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/student-list.deps.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/student-list.runtimeconfig.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/student-list.runtimeconfig.dev.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/student-list.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/student-list.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/StudentList.Services.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/bin/Debug/netcoreapp1.1/StudentList.Services.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/obj/Debug/netcoreapp1.1/student-list.AssemblyInfo.cs
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/obj/Debug/netcoreapp1.1/student-list.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Console/obj/Debug/netcoreapp1.1/student-list.pdb

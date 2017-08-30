@@ -1,0 +1,6 @@
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/bin/Debug/netstandard1.4/StudentList.Services.deps.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/bin/Debug/netstandard1.4/StudentList.Services.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/bin/Debug/netstandard1.4/StudentList.Services.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/obj/Debug/netstandard1.4/StudentList.Services.AssemblyInfo.cs
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/obj/Debug/netstandard1.4/StudentList.Services.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/student-list-xunit/StudentList.Services/obj/Debug/netstandard1.4/StudentList.Services.pdb

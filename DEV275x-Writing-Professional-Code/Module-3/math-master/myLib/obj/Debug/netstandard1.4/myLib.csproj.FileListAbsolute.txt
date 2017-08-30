@@ -1,0 +1,6 @@
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/bin/Debug/netstandard1.4/myLib.deps.json
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/bin/Debug/netstandard1.4/myLib.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/bin/Debug/netstandard1.4/myLib.pdb
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/obj/Debug/netstandard1.4/myLib.AssemblyInfo.cs
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/obj/Debug/netstandard1.4/myLib.dll
+/var/www/Github-Bitbucket/edx/DEV275x-Writing-Professional-Code/Module-3/math-master/myLib/obj/Debug/netstandard1.4/myLib.pdb
