@@ -1,0 +1,17 @@
+{
+  "name": "homework-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "petstore.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Neradovic",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^3.5.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5"
+  }
+}
