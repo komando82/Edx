@@ -4,14 +4,16 @@
   "description": "",
   "main": "petstore.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/",
+    "test:watch": "npm run test -- -w",
+    "lint": "eslint petstore.js",
+    "lint:watch": "esw petstore.js -w"
   },
   "author": "Ivan Neradovic",
   "license": "MIT",
-  "dependencies": {
-    "mocha": "^3.5.0"
-  },
   "devDependencies": {
-    "jshint": "^2.9.5"
+    "eslint": "^4.6.0",
+    "eslint-watch": "^3.1.2",
+    "mocha": "^3.5.0"
   }
 }

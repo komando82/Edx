@@ -10,7 +10,7 @@
  */
 function calculateFoodOrder(numAnimals, avgFood) {
     // IMPLEMENT THIS FUNCTION!
-    if (numAnimals < 0 || avgFood < 0 || typeof numAnimals != 'number' || typeof avgFood != 'number')
+    if (numAnimals < 0 || avgFood < 0 || typeof numAnimals !== 'number' || typeof avgFood !== 'number')
     {
         return -1;
     }
@@ -37,7 +37,7 @@ function mostPopularDays(week) {
     var highestTraffic = 0;
     var popularDay = [];
 
-    week.forEach(function(currentValue, index) {
+    week.forEach(function(currentValue) {
         if(currentValue.traffic >= highestTraffic)
         {
             if(currentValue.traffic > highestTraffic)
@@ -95,6 +95,7 @@ function createAnimalObjects(names, types, breeds) {
     return animals;
 }
 
+/* global exports */
 exports._test = {
     calculateFoodOrder: calculateFoodOrder,
     mostPopularDays: mostPopularDays,
@@ -121,7 +122,7 @@ function Weekday (name, traffic) {
 /**
  * A prototype to create Item objects
  */
-function Item (name, barcode, sellingPrice, buyingPrice) {
+function Item (name, barcode, sellingPrice, buyingPrice) { // eslint-disable-line 
     this.name = name;
     this.barcode = barcode;
     this.sellingPrice = sellingPrice;
@@ -141,7 +142,7 @@ function Animal (name, type, breed) {
  * Use this function to test whether you are able to run JavaScript
  * from your browser's console.
  */
-function helloworld() {
+function helloworld() { // eslint-disable-line 
     return 'hello world!';
 }
 
