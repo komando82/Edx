@@ -28,45 +28,46 @@ var resetDisplay = false;
 
 var op = '';
 
-var firstNum = '';
-var secondNum = '';
+var previousNum = 0;
+var currentNum = 0;
 
 
 
 function checkDisplayValue()
 {
-    if (resetDisplay){
-        return '';
-    }
-
     return display.val();
 }
 
-function result(op, num1, num2)
+function result(op, previousNum, currentNum)
 {
+    if (previousNum === 0)
+    {
+        return currentNum;
+    }
+
     var result;
 
-    num1 = parseInt(num1);
-    num2 = parseInt(num2);
+    previousNum = parseInt(previousNum);
+    currentNum = parseInt(currentNum);
 
     switch(op) {
         case "+":
-            result = num1 + num2;
+            result = previousNum + currentNum;
             break;
         case "-":
-            result = num1 - num2;
+            result = previousNum - currentNum;
             break;
         case "*":
-            result = num1 * num2;
+            result = previousNum * currentNum;
             break;
         case "/":
-            if (num2 === 0)
+            if (currentNum === 0)
             {
                 result = 'Infinity';
             }
             else
             {
-                result = num1 / num2;
+                result = previousNum / currentNum;
             }
             break;
     }
@@ -75,102 +76,63 @@ function result(op, num1, num2)
 }
 
 
-button0.click(function(){
-    display.val(checkDisplayValue() + '0');
-    resetDisplay = false;
-    console.log("0");
+$('#button0, #button1, #button2, #button3, #button4, #button5, #button6, #button7, #button8, #button9').click(function(){
+    var clickedNum = $(this).val();
+    if(resetDisplay)
+    {
+        display.val(clickedNum);
+        resetDisplay = false;
+    }
+    else
+    {
+        display.val(checkDisplayValue() + clickedNum);
+    }
+    console.log(clickedNum);
 });
-
-button1.click(function(){
-    display.val(checkDisplayValue() + '1');
-    resetDisplay = false;
-    console.log("1");
-});
-
-button2.click(function(){
-    display.val(checkDisplayValue() + '2');
-    resetDisplay = false;
-    console.log("2");
-});
-
-button3.click(function(){
-    display.val(checkDisplayValue() + '3');
-    resetDisplay = false;
-    console.log("3");
-});
-
-button4.click(function(){
-    display.val(checkDisplayValue() + '4');
-    resetDisplay = false;
-    console.log("4");
-});
-
-button5.click(function(){
-    display.val(checkDisplayValue() + '5');
-    resetDisplay = false;
-    console.log("5");
-});
-
-button6.click(function(){
-    display.val(checkDisplayValue() + '6');
-    resetDisplay = false;
-    console.log("6");
-});
-
-button7.click(function(){
-    display.val(checkDisplayValue() + '7');
-    resetDisplay = false;
-    console.log("7");
-});
-
-button8.click(function(){
-    display.val(checkDisplayValue() + '8');
-    resetDisplay = false;
-    console.log("8");
-});
-
-button9.click(function(){
-    display.val(checkDisplayValue() + '9');
-    resetDisplay = false;
-    console.log("9");
-});
-
 
 addButton.click(function(){
-    firstNum = checkDisplayValue();
+    currentNum = checkDisplayValue();
     resetDisplay = true;
+    previousNum = result(op, previousNum, currentNum);
     op = '+';
     console.log("+");
+    display.val(previousNum);
 });
 
 subtractButton.click(function(){
-    firstNum = checkDisplayValue();
+    currentNum = checkDisplayValue();
     resetDisplay = true;
+    previousNum = result(op, previousNum, currentNum);
     op = '-';
     console.log("-");
+    display.val(previousNum);
 });
 
 multiplyButton.click(function(){
-    firstNum = checkDisplayValue();
+    currentNum = checkDisplayValue();
     resetDisplay = true;
+    previousNum = result(op, previousNum, currentNum);
     op = '*';
     console.log("*");
+    display.val(previousNum);
 });
 
 divideButton.click(function(){
-    firstNum = checkDisplayValue();
+    currentNum = checkDisplayValue();
     resetDisplay = true;
+    previousNum = result(op, previousNum, currentNum);
     op = '/';
     console.log("/");
+    display.val(previousNum);
 });
 
 
 
 equalsButton.click(function(){
-    secondNum = checkDisplayValue();
+    currentNum = checkDisplayValue();
     resetDisplay = true;
     console.log("=");
-    console.log(firstNum);
-    console.log(secondNum);
-    display.val(result(op, firstNum, secondNum));
+    console.log(previousNum);
+    console.log(currentNum);
+    display.val(result(op, previousNum, currentNum));
 });
