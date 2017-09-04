@@ -1,0 +1,19 @@
+{
+  "name": "homework-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "calc.js",
+  "scripts": {
+    "test": "mocha test/",
+    "test:watch": "npm run test -- -w",
+    "lint": "eslint calc.js",
+    "lint:watch": "esw calc.js -w"
+  },
+  "author": "Ivan Neradovic",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.6.0",
+    "eslint-watch": "^3.1.2",
+    "mocha": "^3.5.0"
+  }
+}
