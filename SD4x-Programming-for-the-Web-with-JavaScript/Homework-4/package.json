@@ -1,0 +1,27 @@
+{
+  "name": "homework-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "FontChooser.js",
+  "scripts": {
+    "test:watch": "npm run test -- -w",
+    "lint": "eslint FontChooser.js",
+    "lint:watch": "esw FontChooser.js -w",
+    "test": "react-scripts test --env=jsdom"
+  },
+  "author": "Ivan Neradovic",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "^1.0.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-watch": "^3.1.2",
+    "chai": "^4.1.0",
+    "enzyme": "^2.9.1",
+    "react-test-renderer": "^15.6.1"
+  }
+}
