@@ -4,10 +4,47 @@ var app = express();
 var Animal = require('./Animal.js');
 var Toy = require('./Toy.js');
 
+function prepareDataFromUrlQuery (urlQueryIds, urlQueryQty) {
+
+	var index;
+
+	var idUniqueArr = [];
+	var idsToQuery = [];
+
+	var idQtyRelObj = {};
+	var returnObj = {};
+
+	for (var i = 0; i < urlQueryIds.length; i++) {
+
+		if (urlQueryQty[i] < 1 || isNaN(urlQueryQty[i]) || urlQueryQty[i] === true) {
+			continue;
+		}
+
+		index = idUniqueArr.indexOf(urlQueryIds[i]);
+
+		if (index === -1) {
+			idUniqueArr.push(urlQueryIds[i]);
+
+			idsToQuery.push({id: urlQueryIds[i]});
+			idQtyRelObj[urlQueryIds[i]] = parseInt(urlQueryQty[i]);
+		}
+		else {
+			idQtyRelObj[urlQueryIds[i]] += parseInt(urlQueryQty[i]);
+		}
+
+	}
+
+	returnObj.idQtyRelObj = idQtyRelObj;
+	returnObj.idsToQuery = idsToQuery;
+
+	return returnObj;
+
+}
+
 app.use('/findToy', (req, res) => {
-    
-    var findToyById = req.query.id;
-	
+
+	var findToyById = req.query.id;
+
 	if (findToyById === undefined) {
 		res.send({});
 	}
@@ -24,17 +61,17 @@ app.use('/findToy', (req, res) => {
 			}
 		});
 	}
-    
+
 });
 
 app.use('/findAnimals', (req, res) => {
-    
+
 	var animalSpecies = req.query.species;
 	var animalTrait = req.query.trait;
 	var animalGender = req.query.gender;
 
 	var queryObj = {};
-	
+
 	if (animalSpecies === undefined && animalTrait === undefined && animalGender === undefined) {
 		res.send({});
 	}
@@ -63,11 +100,11 @@ app.use('/findAnimals', (req, res) => {
 		});
 
 	}
-    
+
 });
 
 app.use('/animalsYoungerThan', (req, res) => {
-    
+
 	var animalAge = req.query.age;
 
 	if (animalAge === undefined) {
@@ -88,7 +125,7 @@ app.use('/animalsYoungerThan', (req, res) => {
 			else {
 				res.send({
 					count: animals.length,
-					names: animals.map(function(animal) {
+					names: animals.map(function (animal) {
 						return animal.name;
 					})
 				});
@@ -96,71 +133,69 @@ app.use('/animalsYoungerThan', (req, res) => {
 		});
 
 	}
-    
+
 });
 
-
 app.use('/calculatePrice', (req, res) => {
-	
-	var toyId = req.query.id;
-	var toyQty = req.query.qty;
 
-	var ids = buildQueryIdObj(toyId, toyQty);
+	var urlQueryIds = req.query.id;
+	var urlQueryQty = req.query.qty;
 
-	var items = [];
-	var totalPrice;
-	var subTotal;
+	if (urlQueryIds.length !== urlQueryQty.length) {
+		res.send({});
+	}
+	else {
 
-	Toy.find({ $or: ids }, (err, toy) => {
-		if (toy.length === 0) {
-			res.send({
-				items: [],
-				totalPrice :0
-			});
-		}
-		else {
-			var items = [];
+		var dataPrepObj = prepareDataFromUrlQuery(urlQueryIds, urlQueryQty);
 
-			for (var i = 0; i < toy.length; i++) {
-				items.push({
-					item: toy[i].id,
-					qty: 0,
-					subtotal: 0
+		var items = [];
+		var qty;
+		var totalPrice = 0;
+
+		Toy.find({ $or: dataPrepObj.idsToQuery }, (err, toy) => {
+			if (err) {
+				res.send('Error: ' + err);
+			}
+			else if (toy.length === 0) {
+				res.send({
+					items: [],
+					totalPrice: 0
 				});
 			}
+			else {
 
-			res.send({
-				items: items,
-				totalPrice :0
-			});
-		}
-	});
+				for (var i = 0; i < toy.length; i++) {
 
+					qty = dataPrepObj.idQtyRelObj[toy[i].id];
 
-    
+					items.push({
+						item: toy[i].id,
+						qty: qty,
+						subtotal: toy[i].price * qty
+					});
+
+					totalPrice += toy[i].price * qty;
+
+				}
+
+				res.send({
+					items: items,
+					totalPrice: totalPrice
+				});
+			}
+		});
+
+	}
+
 });
 
 app.use('/', (req, res) => {
-	res.json({ msg : 'It works!' });
+	res.json({ msg: 'It works!' });
 });
 
 app.listen(3000, () => {
 	console.log('Listening on port 3000');
 });
-
-function buildQueryIdObj(toyIds, toyQtys) {
-	var ids = [];
-
-	for (var i = 0; i < toyIds.length; ++i) {
-		if (toyQtys[i] >= 1 && !isNaN(toyQtys[i]) && toyQtys[i] !== true) {
-			ids.push({
-				id: toyIds[i]
-			});
-		}
-	}
-	
-	return ids;
-}
 
 // Please do not delete the following line; we need it for testing!
 module.exports = app;
