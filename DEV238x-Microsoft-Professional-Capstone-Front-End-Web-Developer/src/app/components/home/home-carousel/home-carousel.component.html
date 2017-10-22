@@ -1,0 +1,107 @@
+<div *ngIf="images.length > 0" class="swiper-outer-container">
+    <div class="toggle-container">
+        <div class="toggle btn toggle-on-off pull-right" data-toggle="toggle" (click)='toggleOnOffClick($event)' [ngClass]="{
+            'btn-primary': toggleOnOff,
+            'btn-on-off off': !toggleOnOff
+            }">
+            <input type="checkbox" checked="" data-toggle="toggle">
+            <div class="toggle-group">
+                <label class="btn btn-primary toggle-on">On</label>
+                <label class="btn btn-default active toggle-off">Off</label>
+                <span class="toggle-handle btn btn-on-off"></span>
+            </div>
+        </div>
+        <div class="pull-right toggle-slide-show">
+            Toggle Slide Show
+        </div>
+    </div>
+    
+    <swiper [config]="config" #usefulSwiper class="sw">
+        <div class="swiper-wrapper">
+            <div *ngFor="let number of randomImagesPerSlide; let i=index" class="swiper-slide">
+                <div *ngIf="number == 1" class="row swiper-image-box">
+                    <div class="col-sm-12 text-center align-middle swiper-image-wrapper">
+                        <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i]].id }}">
+                            <img src="{{ images[randomImagesPerSlideHelper[i]].imagelink }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div *ngIf="number == 2" class="row swiper-image-box">
+                    <div class="col-md-6 text-center align-middle swiper-image-wrapper">
+                        <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i]].id }}">
+                            <img src="{{ images[randomImagesPerSlideHelper[i]].imagelink }}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-center align-middle swiper-image-wrapper">
+                        <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 1].id }}">
+                            <img src="{{ images[randomImagesPerSlideHelper[i] + 1].imagelink }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div *ngIf="number == 3" class="row swiper-image-box">
+                    <div class="col-md-6 text-center align-middle swiper-image-wrapper">
+                        <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i]].id }}">
+                            <img src="{{ images[randomImagesPerSlideHelper[i]].imagelink }}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12 text-center align-middle swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 1].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i] + 1].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center align-middle swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 2].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i] + 2].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="number == 4" class="row swiper-image-box">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12 text-center align-middle swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i]].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i]].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center align-middle swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 1].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i] + 1].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12 text-center align-middle swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 2].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i] + 2].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center swiper-image-wrapper-half">
+                                <a routerLink = "/product/{{ images[randomImagesPerSlideHelper[i] + 3].id }}">
+                                    <img src="{{ images[randomImagesPerSlideHelper[i] + 3].imagelink }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </swiper>
+
+    <!-- Add Arrows -->
+    <div class="swiper-button-next" (click)='prevNextClick($event)'></div>
+    <div class="swiper-button-prev" (click)='prevNextClick($event)'></div>
+
+</div>
+

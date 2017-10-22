@@ -1,0 +1,18 @@
+.fixed-top {
+    margin-top: 0;
+}
+
+.fa-shopping-cart {
+    font-size: 20px;
+}
+
+.badge {
+    vertical-align: middle;
+    background: #aaa;
+    font-size: 85%;
+    border-radius: 1.25rem;
+}
+
+.active .badge {
+    background: rgb(75, 151, 232);
+}
