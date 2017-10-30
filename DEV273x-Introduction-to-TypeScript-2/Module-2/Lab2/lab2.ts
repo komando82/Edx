@@ -62,7 +62,7 @@ for (let index: number = 0; index < 4; index++) {
     })
 }
 
-let diceArray : Array<DiceRoller> = [];
+let diceArray: Array<DiceRoller> = [];
 
 elementSets.map( (elem, index) => {
     let numberChangeClass = new DiceRoller(elem.div);
@@ -73,7 +73,7 @@ elementSets.map( (elem, index) => {
     document.body.appendChild(elem.div);
 });
 
-let button = document.createElement('button');
+let button: HTMLElement = document.createElement('button');
 
 // Button styles in variables
 button.innerText = "Roll the Dice";
