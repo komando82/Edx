@@ -1,0 +1,22 @@
+<html>
+    <body>
+
+        <button id="reverseArray">Reverse Array</button>
+        <button id="lastItemOfArray">Last Item of Array</button>
+        <button id="firstItemOfArray">First Item of Array</button>
+        <button id="concatenateArray" >Concatenate Array</button>
+
+        <div id="output" style="width:100%;"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.12/system.js"></script>
+        <script>
+            SystemJS.config({
+                map: {
+                    'lodash': './node_modules/lodash/lodash.js'
+                }
+            });
+            SystemJS.import('main.js')
+        </script>
+        
+    </body>
+</html>
