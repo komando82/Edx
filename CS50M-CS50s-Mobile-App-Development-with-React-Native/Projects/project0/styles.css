@@ -6,6 +6,7 @@ html, body {
   background-color: #eee;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 ul {
@@ -63,4 +64,35 @@ ul {
 
 .todo-container:first-of-type {
   border-top: 1px solid #333;
+}
+
+#todo-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+} 
+
+#todo-list li > label {
+  margin-left: 10px;
+  cursor: pointer;
+  line-height: 26px;
+}
+
+input[type='checkbox'] { 
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  outline: 0;
+}
+
+#todo-list li > button {
+  margin: 0 20px;
+  padding: 5px 15px;
+  margin-left: auto;
+}
+
+#item-count,
+#unchecked-count {
+  color: blue;
 }
