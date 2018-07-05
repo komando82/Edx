@@ -10,9 +10,7 @@
     */
 
     const toDoButton = document.getElementById('todo-button')
-    toDoButton.addEventListener('click', function() {
-        newTodo()
-    })
+    toDoButton.addEventListener('click', () => newTodo())
 
     const list = document.getElementById('todo-list')
     const itemCountSpan = document.getElementById('item-count')
@@ -70,9 +68,7 @@
         const input = document.createElement('INPUT')
         input.setAttribute('type', 'checkbox')
         input.setAttribute('id', `checkbox-id-${i}`)
-        input.addEventListener('click', function() {
-            updateUncheckedCountonCheck(this.checked)
-        })
+        input.addEventListener('click', () => updateUncheckedCountonCheck(this.checked))
 
         // Create <label> HTML element,
         // add for to link it to input for better User Experience 
@@ -87,7 +83,7 @@
         // and remove <li> item and update Counts
         const deleteButton = document.createElement('BUTTON')
         deleteButton.innerText = 'Delete'
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', () => {
             if (!input.checked) {
                 updateUncheckedCount(true)
             }
