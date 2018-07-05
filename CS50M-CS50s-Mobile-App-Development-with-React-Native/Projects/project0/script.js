@@ -9,17 +9,21 @@
     }
     */
 
+    // collect todo button and attach event Listener
     const toDoButton = document.getElementById('todo-button')
     toDoButton.addEventListener('click', () => newTodo())
 
+    // collect list, itemCountSpan and uncheckedCountSpan
     const list = document.getElementById('todo-list')
     const itemCountSpan = document.getElementById('item-count')
     const uncheckedCountSpan = document.getElementById('unchecked-count')
 
+    // initialize all count values
     let itemCount = 0;
     let uncheckedCount = 0;
     let i = 0;
 
+    // update ItemCount value
     function updateItemCount(remove = false) {
         if (remove) {
             itemCount--
@@ -28,6 +32,7 @@
         itemCountSpan.innerText = itemCount
     }
 
+    // update UncheckedCount value
     function updateUncheckedCount(remove = false) {
         if (remove) {
             uncheckedCount--
@@ -36,6 +41,7 @@
         uncheckedCountSpan.innerText = uncheckedCount
     }
 
+    // update UncheckedCount value on input check/uncheck
     function updateUncheckedCountonCheck(checked = true) {
         if (checked) {
             uncheckedCount--
@@ -46,6 +52,7 @@
         uncheckedCountSpan.innerText = uncheckedCount
     }
 
+    // main function for handeling TODO section
     function newTodo() {
 
         // Increment 
