@@ -23,35 +23,6 @@
     let uncheckedCount = 0;
     let i = 0;
 
-    // update ItemCount value
-    function updateItemCount(remove = false) {
-        if (remove) {
-            itemCount--
-        }
-
-        itemCountSpan.innerText = itemCount
-    }
-
-    // update UncheckedCount value
-    function updateUncheckedCount(remove = false) {
-        if (remove) {
-            uncheckedCount--
-        }
-
-        uncheckedCountSpan.innerText = uncheckedCount
-    }
-
-    // update UncheckedCount value on input check/uncheck
-    function updateUncheckedCountonCheck(checked = true) {
-        if (checked) {
-            uncheckedCount--
-        } else {
-            uncheckedCount++
-        }
-
-        uncheckedCountSpan.innerText = uncheckedCount
-    }
-
     // main function for handeling TODO section
     function newTodo() {
 
@@ -109,6 +80,35 @@
         updateUncheckedCount()
         updateItemCount()
 
+    }
+
+    // update ItemCount value
+    function updateItemCount(remove = false) {
+        if (remove) {
+            itemCount--
+        }
+
+        itemCountSpan.innerText = itemCount
+    }
+
+    // update UncheckedCount value
+    function updateUncheckedCount(remove = false) {
+        if (remove) {
+            uncheckedCount--
+        }
+
+        uncheckedCountSpan.innerText = uncheckedCount
+    }
+
+    // update UncheckedCount value on input check/uncheck
+    function updateUncheckedCountonCheck(checked = true) {
+        if (checked) {
+            uncheckedCount--
+        } else {
+            uncheckedCount++
+        }
+
+        uncheckedCountSpan.innerText = uncheckedCount
     }
 
 })()
