@@ -14,6 +14,16 @@
 
     <script type="text/babel">
 
+        class Heading extends React.Component {
+            render() {
+                const title = !this.props.title ? 'Work Timer' : 'Break Timer'
+
+                return (
+                    <h1>{title.toUpperCase()}</h1>
+                )
+            }
+        }
+
         class App extends React.Component {
             constructor() {
                 super()
@@ -174,10 +184,7 @@
             render() {
                 return (
                     <div>
-                        <h1>{!this.state.breakTime ? 'Work Timer'.toUpperCase() : 'Break Timer'.toUpperCase()}</h1>
-
-                        <p>Work time seconds: {this.addZeroToNumberLowwerThanTen(this.workSec)}</p>
-                        <p>Break time seconds: {this.addZeroToNumberLowwerThanTen(this.breakSec)}</p>
+                        <Heading title={this.state.breakTime}/>
 
                         <button onClick={this.pauseCountDown}>{this.state.isPaused ? 'Start' : 'Pause'}</button>
                         <button onClick={this.resetCountDown}>Reset</button>
