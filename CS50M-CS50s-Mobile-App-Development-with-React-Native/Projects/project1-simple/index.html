@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super();
+
+                this.workMin = 11
+                this.breakMin = 6
+
+                this.state = {
+                    name: "Ivan",
+                    workTimeMin: this.workMin,
+                    workTimeSec: 0,
+                    breakTimeMin: this.breakMin,
+                    breakTimeSec: 0,
+                    isp: false,
+                    breakTime: false,
+                };
+
+                this.isPaused = false;
+
+                this.time = 0;
+                this.int;
+            }
+
+            componentDidMount = () => {
+                this.int = setInterval(() => this.countDown(), 1000);
+            };
+
+            componentDidUpdate = (prevProps, prevState, snapshot) => {
+                if (this.state.isp !== prevState.isp) {
+                    if (this.state.isp) {
+                        clearInterval(this.int);
+                    } else {
+                        this.int = setInterval(() => this.countDown(), 1000);
+                    }
+                }
+            };
+
+            countDown() {
+                let min
+
+                if (!this.state.breakTime) {
+                    min = this.state.workTimeMin - 1
+                    this.setState({ workTimeMin: min });
+
+                    if (min < 0) {
+                        this.setState({ 
+                            breakTime: !this.state.breakTime,
+                            breakTimeMin: this.breakMin
+                        });
+                    }
+                } else {
+                    min = this.state.breakTimeMin - 1
+                    this.setState({ breakTimeMin: min });
+
+                    if (min < 0) {
+                        this.setState({ 
+                            breakTime: !this.state.breakTime,
+                            workTimeMin: this.workMin
+                        });
+                    }
+                }
+
+                console.log(min)
+            }
+
+            pauseCountDown = () => {
+                console.log("pause/start");
+                this.setState({ name: "Petar" });
+
+                if (this.state.isp) {
+                    this.setState({ isp: false });
+                } else {
+                    this.setState({ isp: true });
+                }
+            };
+
+            resetCountDown = () => {
+                console.log("reset");
+                this.setState({ 
+                    isp: true,
+                    workTimeMin: this.workMin,
+                    breakTime: false 
+                });
+            };
+
+            render() {
+                return (
+                    <div>
+                        <h1>Hello, {this.state.name}</h1>
+                        <p>Work time minutes: {this.workMin}</p>
+                        <p>Break time minutes: {this.breakMin}</p>
+                        <button onClick={this.pauseCountDown}>{this.state.isp ? 'Start' : 'Pause'}</button>
+                        <button onClick={this.resetCountDown}>Reset</button>
+                        <div>
+                            <span>{!this.state.breakTime ? this.state.workTimeMin : this.state.breakTimeMin}</span>
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        const rootElement = document.getElementById("root");
+        ReactDOM.render(<App />, rootElement);
+
+    </script>
+</body>
+</html>
