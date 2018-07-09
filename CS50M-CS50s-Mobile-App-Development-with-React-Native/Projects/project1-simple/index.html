@@ -18,97 +18,138 @@
             constructor() {
                 super();
 
-                this.workMin = 11
-                this.breakMin = 6
+                this.workMin = 2
+                this.workSec = 15
+
+                this.breakMin = 1
+                this.breakSec = 3
 
                 this.state = {
-                    name: "Ivan",
-                    workTimeMin: this.workMin,
-                    workTimeSec: 0,
-                    breakTimeMin: this.breakMin,
-                    breakTimeSec: 0,
-                    isp: false,
+                    workTimeSec: this.workSec,
+                    breakTimeSec: this.breakSec,
+                    isPaused: false,
                     breakTime: false,
                 };
-
-                this.isPaused = false;
-
-                this.time = 0;
-                this.int;
             }
 
             componentDidMount = () => {
-                this.int = setInterval(() => this.countDown(), 1000);
+                this.int = setInterval(() => this.countDown(), 1000)
             };
 
             componentDidUpdate = (prevProps, prevState, snapshot) => {
-                if (this.state.isp !== prevState.isp) {
-                    if (this.state.isp) {
-                        clearInterval(this.int);
+                if (this.state.isPaused !== prevState.isPaused) {
+                    if (this.state.isPaused) {
+                        clearInterval(this.int)
                     } else {
-                        this.int = setInterval(() => this.countDown(), 1000);
+                        this.int = setInterval(() => this.countDown(), 1000)
                     }
                 }
             };
 
             countDown() {
-                let min
+                let sec
 
                 if (!this.state.breakTime) {
-                    min = this.state.workTimeMin - 1
-                    this.setState({ workTimeMin: min });
+                    sec = this.state.workTimeSec - 1
+                    this.setState({ workTimeSec: sec })
 
-                    if (min < 0) {
+                    if (sec < 0) {
                         this.setState({ 
                             breakTime: !this.state.breakTime,
-                            breakTimeMin: this.breakMin
+                            breakTimeSec: this.breakSec
                         });
                     }
                 } else {
-                    min = this.state.breakTimeMin - 1
-                    this.setState({ breakTimeMin: min });
+                    sec = this.state.breakTimeSec - 1
+                    this.setState({ breakTimeSec: sec })
 
-                    if (min < 0) {
+                    if (sec < 0) {
                         this.setState({ 
                             breakTime: !this.state.breakTime,
-                            workTimeMin: this.workMin
+                            workTimeSec: this.workSec
                         });
                     }
                 }
 
-                console.log(min)
+                console.log(sec)
             }
 
             pauseCountDown = () => {
-                console.log("pause/start");
-                this.setState({ name: "Petar" });
-
-                if (this.state.isp) {
-                    this.setState({ isp: false });
+                if (this.state.isPaused) {
+                    console.log("start")
+                    this.setState({ isPaused: false })
                 } else {
-                    this.setState({ isp: true });
+                    console.log("pause")
+                    this.setState({ isPaused: true })
                 }
             };
 
             resetCountDown = () => {
-                console.log("reset");
+                console.log("reset")
+
+                this.resetCounterHelper()
+            };
+
+            workTimeChange = (e) => {
+                let inpValue = parseInt(e.target.value);
+                // console.log(inpValue)
+                if (inpValue >= 0) {
+                    this.workSec = inpValue
+                } else {
+                    this.workSec = 0
+                }
+
+                this.resetCounterHelper()
+            }
+
+            breakTimeChange = (e) => {
+                let inpValue = parseInt(e.target.value)
+                
+                if (inpValue >= 0) {
+                    this.breakSec = inpValue
+                } else {
+                    this.breakSec = 0
+                }
+
+                this.resetCounterHelper()
+            }
+
+            resetCounterHelper = () => {
                 this.setState({ 
-                    isp: true,
-                    workTimeMin: this.workMin,
+                    isPaused: true,
+                    workTimeSec: this.workSec,
                     breakTime: false 
                 });
-            };
+            }
+
+            addZeroToNumberLowwerThanTen(num) {
+                if (num < 10) {
+                    return `0${num}`
+                } else {
+                    return num
+                }
+            }
 
             render() {
                 return (
                     <div>
-                        <h1>Hello, {this.state.name}</h1>
-                        <p>Work time minutes: {this.workMin}</p>
-                        <p>Break time minutes: {this.breakMin}</p>
-                        <button onClick={this.pauseCountDown}>{this.state.isp ? 'Start' : 'Pause'}</button>
+                        <h1>{!this.state.breakTime ? 'Work Timer'.toUpperCase() : 'Break Timer'.toUpperCase()}</h1>
+                        <p>Work time seconds: {this.addZeroToNumberLowwerThanTen(this.workSec)}</p>
+                        <p>Break time seconds: {this.addZeroToNumberLowwerThanTen(this.breakSec)}</p>
+                        <button onClick={this.pauseCountDown}>{this.state.isPaused ? 'Start' : 'Pause'}</button>
                         <button onClick={this.resetCountDown}>Reset</button>
                         <div>
-                            <span>{!this.state.breakTime ? this.state.workTimeMin : this.state.breakTimeMin}</span>
+                            <span>{this.addZeroToNumberLowwerThanTen(!this.state.breakTime ? this.state.workTimeSec : this.state.breakTimeSec)}</span>
+                        </div>
+                        <div>
+                            Work Time: 
+                            Mins: <input type="text" />
+                            Secs: <input type="text" value={this.workSec} onChange={this.workTimeChange} />
+                        </div>
+                        <div>
+                            Break Time: 
+                            Mins: <input type="text"/>
+                            Secs: <input type="text" value={this.breakSec} onChange={this.breakTimeChange} />
                         </div>
                     </div>
                 );
