@@ -24,22 +24,49 @@
             }
         }
 
-        class Timer extends React.Component {
-            addZeroToNumberLowwerThanTen(num) {
-                if (num < 10) {
-                    return `0${num}`
-                } else {
-                    return num
-                }
+        class Button extends React.Component {
+            clickButton = () => {
+                this.props.onClick()
             }
 
             render() {
-                const mins = this.addZeroToNumberLowwerThanTen(!this.props.whichTime ? this.props.workTimeMin : this.props.breakTimeMin)
-                const secs = this.addZeroToNumberLowwerThanTen(!this.props.whichTime ? this.props.workTimeSec : this.props.breakTimeSec)
+                let buttonText
+
+                if (this.props.isReset) {
+                    buttonText = 'Reset'
+                } else if (this.props.isPaused) {
+                    buttonText = 'Start'
+                } else {
+                    buttonText = 'Pause'
+                }
 
                 return (
+                    <button onClick={this.clickButton}>{buttonText}</button>
+                )
+            }
+        }
+
+        class Timer extends React.Component {
+            addZeroToNumberLowerThanTen(num) {
+                return (num < 10) ? `0${num}` : num
+            }
+
+            render() {
+                return (
                     <div>
-                        {mins}&nbsp;:&nbsp;{secs}
+                        {!this.props.whichTime ? (
+                            <span>
+                                {this.addZeroToNumberLowerThanTen(this.props.workTimeMin)}
+                                &nbsp;:&nbsp;
+                                {this.addZeroToNumberLowerThanTen(this.props.workTimeSec)}
+                            </span>
+                        ) : (
+                            <span>
+                                {this.addZeroToNumberLowerThanTen(this.props.breakTimeMin)}
+                                &nbsp;:&nbsp;
+                                {this.addZeroToNumberLowerThanTen(this.props.breakTimeSec)}
+                            </span>
+                        )}
                     </div>
                 )
             }
@@ -158,30 +185,19 @@
                 // console.log('change time')
                 let inpValue = parseInt(e.target.value)
 
-                if (!breakTime) {
-                    if (inpValue >= 0) {
-                        if (inpValue >= 60) {
-                            this.workSec = inpValue % 60
-                            this.workMin += Math.floor(inpValue / 60)
-                        } else {
-                            this.workSec = inpValue
-                        }
+                let workOrBreak = (!breakTime) ? 'work' : 'break'
+
+                if (inpValue >= 0) {
+                    if (inpValue >= 60) {
+                        this[`${workOrBreak}Sec`] = inpValue % 60
+                        this[`${workOrBreak}Min`] += Math.floor(inpValue / 60)
                     } else {
-                        this.workSec = 0
+                        this[`${workOrBreak}Sec`] = inpValue
                     }
                 } else {
-                    if (inpValue >= 0) {
-                        if (inpValue >= 60) {
-                            this.breakSec = inpValue % 60
-                            this.breakMin += Math.floor(inpValue / 60)
-                        } else {
-                            this.breakSec = inpValue
-                        }
-                    } else {
-                        this.breakSec = 0
-                    }
+                    this[`${workOrBreak}Sec`] = 0
                 }
-
+                
                 this.resetCounterHelper()
             }
 
@@ -199,8 +215,16 @@
                     <div>
                         <Heading title={this.state.breakTime} />
 
-                        <button onClick={this.pauseCountDown}>{this.state.isPaused ? 'Start' : 'Pause'}</button>
-                        <button onClick={this.resetCountDown}>Reset</button>
+                        <Button 
+                            isReset={false}
+                            isPaused={this.state.isPaused}
+                            onClick={this.pauseCountDown}
+                        />
+                        <Button 
+                            isReset={true}
+                            isPaused={this.state.isPaused}
+                            onClick={this.resetCountDown}
+                        />
 
                         <Timer 
                             whichTime={this.state.breakTime} 
