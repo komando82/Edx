@@ -24,6 +24,27 @@
             }
         }
 
+        class Timer extends React.Component {
+            addZeroToNumberLowwerThanTen(num) {
+                if (num < 10) {
+                    return `0${num}`
+                } else {
+                    return num
+                }
+            }
+
+            render() {
+                const mins = this.addZeroToNumberLowwerThanTen(!this.props.whichTime ? this.props.workTimeMin : this.props.breakTimeMin)
+                const secs = this.addZeroToNumberLowwerThanTen(!this.props.whichTime ? this.props.workTimeSec : this.props.breakTimeSec)
+
+                return (
+                    <div>
+                        {mins}&nbsp;:&nbsp;{secs}
+                    </div>
+                )
+            }
+        }
+
         class App extends React.Component {
             constructor() {
                 super()
@@ -173,27 +194,21 @@
                 })
             }
 
-            addZeroToNumberLowwerThanTen(num) {
-                if (num < 10) {
-                    return `0${num}`
-                } else {
-                    return num
-                }
-            }
-
             render() {
                 return (
                     <div>
-                        <Heading title={this.state.breakTime}/>
+                        <Heading title={this.state.breakTime} />
 
                         <button onClick={this.pauseCountDown}>{this.state.isPaused ? 'Start' : 'Pause'}</button>
                         <button onClick={this.resetCountDown}>Reset</button>
 
-                        <div>
-                            <span>{this.addZeroToNumberLowwerThanTen(!this.state.breakTime ? this.state.workTimeMin : this.state.breakTimeMin)}</span>
-                            &nbsp;:&nbsp;
-                            <span>{this.addZeroToNumberLowwerThanTen(!this.state.breakTime ? this.state.workTimeSec : this.state.breakTimeSec)}</span>
-                        </div>
+                        <Timer 
+                            whichTime={this.state.breakTime} 
+                            workTimeMin={this.state.workTimeMin}
+                            workTimeSec={this.state.workTimeSec}
+                            breakTimeMin={this.state.breakTimeMin}
+                            breakTimeSec={this.state.breakTimeSec}
+                        />
 
                         <div>
                             Work Time: 
