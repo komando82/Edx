@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
+import styles from './App.style.js';
 
 class Timer extends React.Component {
   addZeroToNumberLowerThanTen(num) {
@@ -8,7 +9,7 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <Text>
+      <Text style={styles.timer}>
         {this.addZeroToNumberLowerThanTen(this.props.timeMin)}
         &nbsp;:&nbsp;
         {this.addZeroToNumberLowerThanTen(this.props.timeSec)}

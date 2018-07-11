@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import Bttn from './Bttn.js'
+import Btn from './Button.js'
 import Heading from './Heading.js'
 import Input from './Input.js'
 import Timer from './Timer.js'
@@ -17,7 +17,7 @@ export default class App extends React.Component {
     this.breakMin = 1
     this.breakSec = 3
 
-    this.intervalTime = 500
+    this.intervalTime = 100
 
     this.state = {
       timeMin: this.workMin,
@@ -132,64 +132,39 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
         <Heading title={this.state.breakTime} />
+
+        <Btn 
+          isReset={false}
+          isPaused={this.state.isPaused}
+          onClick={this.pauseCountDown}
+        />
+        <Btn 
+          isReset={true}
+          isPaused={this.state.isPaused}
+          onClick={this.resetCountDown}
+        />
 
         <Timer 
           timeMin={this.state.timeMin}
           timeSec={this.state.timeSec}
         />
 
-        <View style={styles.buttonsWrapper}>
-          <Bttn 
-            isReset={false}
-            isPaused={this.state.isPaused}
-            onClick={this.pauseCountDown}
-          />
-          <Bttn 
-            isReset={true}
-            isPaused={this.state.isPaused}
-            onClick={this.resetCountDown}
-          />
-        </View>
+        <Text>Work Time: </Text>
 
-        <View style={styles.inputsWrapper}>
-          <Text style={styles.rowItemWidth}>Work Time: </Text>
-          <View style={styles.inputsText}>
-            <Text>Mins: </Text>
-            <Input 
-              value={this.state.workInpMin}
-              onChange={this.timeChangeMin}
-            />
-          </View>
-          <View style={styles.inputsText}>
-            <Text>Secs: </Text>
-            <Input 
-              value={this.workSec}
-              onChange={this.timeChangeSec}
-            />
-          </View>
-        </View>
+        <Text>Mins: </Text>
+        <Input 
+          value={this.state.workInpMin}
+          onChange={this.timeChangeMin}
+        />
 
-        <View style={styles.inputsWrapper}>
-          <Text style={styles.rowItemWidth}>Break Time: </Text>
-          <View style={styles.inputsText}>
-            <Text>Mins: </Text>
-            <Input 
-              value={this.state.breakInpMin}
-              breakTime={true}
-              onChange={this.timeChangeMin}
-            />
-          </View>
-          <View style={styles.inputsText}>
-            <Text>Secs: </Text>
-            <Input 
-              value={this.breakSec}
-              breakTime={true}
-              onChange={this.timeChangeSec}
-            />
-          </View>
-        </View>
+        <Text>Secs: </Text>
+        <Input 
+          value={this.workSec}
+          onChange={this.timeChangeSec}
+        />
+
+
       </View>
     );
   }
