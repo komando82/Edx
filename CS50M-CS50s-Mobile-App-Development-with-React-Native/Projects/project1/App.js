@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
+import {vibrate} from './utils'
+
 import Bttn from './Bttn.js'
 import Heading from './Heading.js'
 import Input from './Input.js'
 import Timer from './Timer.js'
+
 import styles from './App.style.js';
 
 export default class App extends React.Component {
@@ -17,7 +20,7 @@ export default class App extends React.Component {
     this.breakMin = 1
     this.breakSec = 3
 
-    this.intervalTime = 500
+    this.intervalTime = 1000
 
     this.state = {
       timeMin: this.workMin,
@@ -73,11 +76,14 @@ export default class App extends React.Component {
       // console.log("pause")
       this.setState({ isPaused: true })
     }
+
+    vibrate()
   }
 
   resetCountDown = () => {
     // console.log("reset")
     this.resetCounterHelper()
+    vibrate()
   }
 
   timeChangeMin = (data) => {
