@@ -7,3 +7,21 @@ body {
     padding-top: 56px;
   }
 }
+
+.bg-image-full {
+  background: no-repeat center center scroll;
+  background-size: cover;
+  height: 250px;
+}
+
+#home-img-first {
+	background-image: url('https://unsplash.it/1900/1080?image=1076');
+}
+
+#home-img-second {
+	background-image: url('https://unsplash.it/1900/1080?image=1081');
+}
+
+.service-item {
+  margin-bottom: 30px;
+}
