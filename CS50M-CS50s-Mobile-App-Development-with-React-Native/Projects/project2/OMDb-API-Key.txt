@@ -1,0 +1,5 @@
+Here is your key: fa45997a
+
+Please append it to all of your API requests,
+
+OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=fa45997a

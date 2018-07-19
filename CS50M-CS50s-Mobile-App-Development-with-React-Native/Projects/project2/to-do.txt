@@ -1,0 +1,8 @@
+19.07.2017
+
+- Create second screen
+- Link first screen movies to second screen details
+- Add prop types
+- Fix home screen styles
+- Add new call for more movies on scoll bottom
+- remove keyboard out of focus
