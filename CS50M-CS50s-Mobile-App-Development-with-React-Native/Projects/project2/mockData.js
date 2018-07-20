@@ -16,7 +16,8 @@ export const search = {
 }
 
 export const movie = {
-	"Title":"Star Wars: Episode IV - A New Hope","Year":"1977",
+	"Title":"Star Wars: Episode IV - A New Hope Lorem Ipsum Dolor Sit Amet",
+	"Year":"1977",
 	"Rated":"PG",
 	"Released":"25 May 1977",
 	"Runtime":"121 min",

@@ -1,8 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button, TouchableOpacity } from 'react-native'
+
+import moviesService from '../service/MoviesService'
 
 import MoviesRow from '../components/MoviesRow'
 import SearchInput from '../components/SearchInput'
+
+import style from './Screen.style'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -11,14 +15,13 @@ class HomeScreen extends React.Component {
 
   state = {
 	  movies: [],
-	  searchTerm: '',
+	  searchTerm: ''
 	}
 
-	apiUrlSearch = 'http://www.omdbapi.com/?apikey=fa45997a&s='
-
-  searchMoviesApi = (text) => {
-    return fetch(`${this.apiUrlSearch}${text}`)
-      .then(response => response.json())
+  searchMovies = (text) => {
+    if (text === '') return
+    
+    moviesService.searchMoviesApi(text)
       .then(data => {
         if (data.Response === "False") {
           this.setState({
@@ -39,21 +42,24 @@ class HomeScreen extends React.Component {
       });
   }
 
+  changeScreen = (data) => {
+    this.props.navigation.navigate('routeMovieDetail', { 
+      title: data.title,
+      imdbID: data.imdbID 
+    })
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Button
-          title="Go to two"
-          onPress={() => this.props.navigation.navigate('routeNameTwo')}
-        />
-        <SearchInput onChange={this.searchMoviesApi}/>
+      <View style={style.container}>
+        <SearchInput onChange={this.searchMovies}/>
         {
           this.state.movies.length === 0 || this.state.searchTerm === ''
-          ? (<Text>No results</Text>)
+          ? (<Text style={style.paddingHorizontal}>No results</Text>)
           : (
             <FlatList
               data={this.state.movies}
-              renderItem={({item}) => <MoviesRow {...item} />}
+              renderItem={({item}) => <MoviesRow onTouch={this.changeScreen} {...item} />}
               keyExtractor={(item, index) => index.toString()}
             />
           )
@@ -62,13 +68,5 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-});
 
 export default HomeScreen

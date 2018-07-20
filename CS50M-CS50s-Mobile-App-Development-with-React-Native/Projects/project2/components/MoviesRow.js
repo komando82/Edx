@@ -1,16 +1,29 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+
+import style from '../screens/Screen.style'
 
 class MoviesRow extends React.Component {
+  touchRow (data) {
+    this.props.onTouch({
+      title: data.Title,
+      imdbID: data.imdbID
+    })
+  }
+
   render() {
+    let uri = (this.props.Poster) === 'N/A' ? 'http://via.placeholder.com/100x100' : this.props.Poster
+
     return (
-      <View style={componentStyles.wrapper}>
-        <Image source={{uri: this.props.Poster}} style={componentStyles.image} />
-        <View style={componentStyles.content}>
-          <Text style={componentStyles.contentTitle}>{this.props.Title}</Text>
-          <Text style={componentStyles.contentYear}>{this.props.Year} ({this.props.Type})</Text>
+      <TouchableOpacity onPress={() => this.touchRow(this.props)}>
+        <View style={[style.padding, componentStyles.wrapper]}>
+          <Image source={{uri: uri}} style={componentStyles.image} />
+          <View style={componentStyles.content}>
+            <Text style={componentStyles.contentTitle}>{this.props.Title}</Text>
+            <Text style={[style.grey, componentStyles.contentYear, ]}>{this.props.Year} ({this.props.Type})</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -18,11 +31,11 @@ class MoviesRow extends React.Component {
 const componentStyles = StyleSheet.create({
   wrapper: {
     flexDirection: "row",
-    marginVertical: 20,
   },
   image: {
     width:100, 
-    height:100
+    height:100,
+    alignSelf: 'center',
   },
   content: {
     flexGrow: 1,
@@ -35,7 +48,6 @@ const componentStyles = StyleSheet.create({
   },
   contentYear: {
     fontSize:16,
-    color:'#aaa'
   },
 });
 

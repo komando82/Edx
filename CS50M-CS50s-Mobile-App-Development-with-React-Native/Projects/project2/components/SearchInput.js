@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, TextInput } from 'react-native'
 
+import style from '../screens/Screen.style'
+
 class SearchInput extends React.Component {
   searchInput = (text) => {
     this.props.onChange(text.toLowerCase())
@@ -25,8 +27,8 @@ const componentStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
     borderRadius: 3,
-    paddingLeft: 5,
-    paddingRight: 5,
+    marginHorizontal: 20,
+    marginTop: 20,
   },
 });
 
