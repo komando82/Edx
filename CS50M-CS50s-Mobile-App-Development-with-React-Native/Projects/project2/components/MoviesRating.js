@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+import PropTypes from 'prop-types'
 
 class MoviesRating extends React.Component {
   barWidthHelper(ratingValue) {
@@ -31,6 +32,11 @@ class MoviesRating extends React.Component {
     )
   }
 }
+
+MoviesRating.propTypes = {
+  Source: PropTypes.string,
+  Value: PropTypes.string,
+};
 
 const componentStyles = StyleSheet.create({
   wrapper: {

@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Text, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput } from 'react-native'
+import PropTypes from 'prop-types'
 
 import style from '../screens/Screen.style'
 
@@ -20,6 +21,10 @@ class SearchInput extends React.Component {
     )
   }
 }
+
+SearchInput.propTypes = {
+  onChange: PropTypes.func,
+};
 
 const componentStyles = StyleSheet.create({
   searchInput: {

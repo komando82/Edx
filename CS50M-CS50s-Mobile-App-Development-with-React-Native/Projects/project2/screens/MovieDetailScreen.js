@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View, Text, Button, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
 import moviesService from '../service/MoviesService'
 
@@ -19,6 +20,8 @@ class MovieDetailScreen extends React.Component {
       movie: {}
     }
 
+    this.moviesService = new moviesService()
+
     if (this.props.navigation.getParam('imdbID')) {
       this.titleMoviesApi(this.props.navigation.getParam('imdbID'))
     }
@@ -27,7 +30,7 @@ class MovieDetailScreen extends React.Component {
   titleMoviesApi = (title) => {
     if (title === '') return
 
-    moviesService.getMovieByImdbIDApi(title)
+    this.moviesService.getMovieByImdbIDService(title)
       .then(data => {
         if (data.Response === "False") {
           throw Error(data.Error)
@@ -50,6 +53,8 @@ class MovieDetailScreen extends React.Component {
       } else {
         this.setState({width: width, height: height})
       }
+    }, function() {
+      console.log('No Image')
     })
   }
 
@@ -100,6 +105,12 @@ class MovieDetailScreen extends React.Component {
     );
   }
 }
+
+MovieDetailScreen.propTypes = {
+  navigation: PropTypes.object,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
 
 const screenStyles = StyleSheet.create({
   scrollView: {

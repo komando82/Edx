@@ -1,9 +1,22 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
 
 import style from '../screens/Screen.style'
 
 class MoviesRow extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.Title !== nextProps.Title) {
+      return true;
+    }
+
+    return false;
+  }
+
   touchRow (data) {
     this.props.onTouch({
       title: data.Title,
@@ -27,6 +40,14 @@ class MoviesRow extends React.Component {
     )
   }
 }
+
+MoviesRow.propTypes = {
+  Poster: PropTypes.string,
+  Title: PropTypes.string,
+  Year: PropTypes.string,
+  Type: PropTypes.string,
+  imdbID: PropTypes.string,
+};
 
 const componentStyles = StyleSheet.create({
   wrapper: {
