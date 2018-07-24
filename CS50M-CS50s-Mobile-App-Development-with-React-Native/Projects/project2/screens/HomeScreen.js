@@ -14,23 +14,17 @@ class HomeScreen extends React.Component {
     title: 'Home',
   };
 
-  constructor() {
-    super()
-
-    this.state = {
-      movies: [],
-      searchTerm: '',
-      page: 1,
-      totalResults: 0
-    }
-
-    this.moviesService = new moviesService()
+  state = {
+    movies: [],
+    searchTerm: '',
+    page: 1,
+    totalResults: 0
   }
 
   searchMovies = (text) => {
     if (text === '') return
     
-    this.moviesService.searchMoviesService(text)
+    moviesService.searchMoviesService(text)
       .then(data => {
         if (data.Response === "False") {
           this.setState({
@@ -64,7 +58,7 @@ class HomeScreen extends React.Component {
   loadMore() {
     if ((this.state.page - 1) * 10 >= this.state.totalResults) return
 
-    this.moviesService.searchMoviesService(this.state.searchTerm, this.state.page)
+    moviesService.searchMoviesService(this.state.searchTerm, this.state.page)
       .then(data => {
         if (data.Response === "False") {
           this.setState({

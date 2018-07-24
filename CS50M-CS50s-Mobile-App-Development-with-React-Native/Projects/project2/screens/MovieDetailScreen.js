@@ -13,15 +13,11 @@ class MovieDetailScreen extends React.Component {
     return { title: navigation.getParam('title') }
   }
 
-  constructor(props) {
-    super(props)
+  state = {
+    movie: {}
+  }
 
-    this.state = {
-      movie: {}
-    }
-
-    this.moviesService = new moviesService()
-
+  componentDidMount() {
     if (this.props.navigation.getParam('imdbID')) {
       this.titleMoviesApi(this.props.navigation.getParam('imdbID'))
     }
@@ -30,7 +26,7 @@ class MovieDetailScreen extends React.Component {
   titleMoviesApi = (title) => {
     if (title === '') return
 
-    this.moviesService.getMovieByImdbIDService(title)
+    moviesService.getMovieByImdbIDService(title)
       .then(data => {
         if (data.Response === "False") {
           throw Error(data.Error)

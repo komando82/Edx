@@ -1,32 +1,26 @@
-import React from 'react'
+const apiKey = 'fa45997a'
+const apiUrlSearchMovies = `http://www.omdbapi.com/?apikey=${apiKey}&s=`
+const apiUrlGetSingleMovie = `http://www.omdbapi.com/?apikey=${apiKey}&i=`
 
-class MoviesService extends React.Component {
+function searchMoviesService(searchString, page = 1) {
+  let pageQuery = (page === 1) ? '' : `&page=${page}`
 
-  constructor() {
-    super()
-
-    this.apiKey = 'fa45997a'
-    this.apiUrlSearchMovies = `http://www.omdbapi.com/?apikey=${this.apiKey}&s=`
-    this.apiUrlGetSingleMovie = `http://www.omdbapi.com/?apikey=${this.apiKey}&i=`
-  }
-
-  searchMoviesService(searchString, page = 1) {
-    let pageQuery = (page === 1) ? '' : `&page=${page}`
-
-    return fetch(`${this.apiUrlSearchMovies}${searchString}${pageQuery}`)
-      .then(response => response.json())
-      .catch(error => {
-        console.log('Error fetching and parsing data: ', error)
-      });
-  }
-
-  getMovieByImdbIDService(imdbID) {
-    return fetch(`${this.apiUrlGetSingleMovie}${imdbID}`)
-      .then(response => response.json())
-      .catch(error => {
-        console.log('Error fetching and parsing data: ', error)
-      });
-  }
+  return fetch(`${apiUrlSearchMovies}${searchString}${pageQuery}`)
+    .then(response => response.json())
+    .catch(error => {
+      console.log('Error fetching and parsing data: ', error)
+    });
 }
 
-export default MoviesService
+function getMovieByImdbIDService(imdbID) {
+  return fetch(`${apiUrlGetSingleMovie}${imdbID}`)
+    .then(response => response.json())
+    .catch(error => {
+      console.log('Error fetching and parsing data: ', error)
+    });
+}
+
+export default {
+  searchMoviesService,
+  getMovieByImdbIDService
+}
