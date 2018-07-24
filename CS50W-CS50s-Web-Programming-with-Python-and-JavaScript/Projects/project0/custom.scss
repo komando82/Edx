@@ -1,27 +1,120 @@
+// SCSS variables
+$widthTablet: 768px;
+$widthNavCollapse: 992px;
+$colorMain1: #f1f1f1;
+$colorMain2: #5f5f5f;
+$colorMobile: #fffafa;
+
 body {
   padding-top: 54px;
+  background-color: $colorMain2;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
+.content {
+  background-color: $colorMain1;
+  padding-top: 20px;
+}
+
+nav, 
+footer {
+  background-color: $colorMain2;
+}
+
+.jumbotron {
+  background-color: #999999;
+}
+
+nav {
+  border-bottom: 1px solid #000;
+}
+
+// SCSS nesting
+nav {
+  ul {
+    li > a{
+      &:hover {
+        background-color: #000;
+        border-radius: 5px;
+      }
+    }
   }
 }
 
-.bg-image-full {
+// SCSS nesting
+nav {
+  &.navbar-dark {
+    .navbar-nav { 
+      a {
+        &.nav-link {
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.jumbotron {
+  color: #fff;
+}
+
+// SCSS inheritance
+%bg-image-full {
   background: no-repeat center center scroll;
   background-size: cover;
   height: 250px;
 }
 
 #home-img-first {
+  // SCSS inheritance
+  @extend %bg-image-full;
 	background-image: url('https://unsplash.it/1900/1080?image=1076');
 }
 
 #home-img-second {
+  // SCSS inheritance
+  @extend %bg-image-full;
 	background-image: url('https://unsplash.it/1900/1080?image=1081');
 }
 
 .service-item {
   margin-bottom: 30px;
 }
+
+table {
+  thead {
+    th {
+      background-color: #999999;
+      color: #fff;
+    }
+  }
+  th, td {
+    &:last-child {
+      text-align: right
+    }
+  }
+}
+
+footer {
+  border-top: 1px solid #000;
+}
+
+@media (max-width: $widthTablet) {
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: $widthNavCollapse) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+@media (max-width: $widthNavCollapse - 1) {
+  .content {
+    background-color: $colorMobile;
+  }
+}
+
