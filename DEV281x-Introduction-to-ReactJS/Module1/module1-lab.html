@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+       <meta charset="UTF-8">
+       <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+
+       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+      <div id="root"></div>
+      <script type="text/babel">
+
+          function TransportationApp(props) {
+              return (
+                  <div className="container">
+                      <HeadingContent />
+                      <TablesContent />
+                  </div>
+              )
+          }
+
+          function HeadingContent() {
+              return (
+                  <div>
+                      <HeadingTwo text="Welcome to React Transportation" />
+
+                      <p>The best place to buy vehicles online</p>
+
+                      <HeadingTwo text="Choose Options" />
+
+                      <NewOnlyCheckbox text="New Only" value="coding" name="interest" />
+
+                      <SelectTypeOptions text="Select Type" />
+                  </div>
+              )
+          }
+
+          function HeadingTwo(props) {
+              return <h2>{props.text}</h2>
+          }
+
+          function NewOnlyCheckbox(props) {
+              return (
+                  <div className="form-check">
+                      <input className="form-check-input" type="checkbox" id={props.value} name={props.name} value={props.value} />
+                      <label htmlFor={props.value} className="form-check-label">{props.text}</label>
+                  </div>
+              )
+          }
+
+          function SelectTypeOptions(props) {
+              let options = ['All', 'Cars', 'Trucks', 'Convertibles']
+
+              return (
+                  <div className="form-inline">
+                      <select className="form-control col-md-3">
+                          {
+                              options.map(option => <option value={option}>{option}</option>)
+                          }
+                      </select>
+                      <label className="col-md-3 justify-content-start">{props.text}</label>
+                  </div>
+              )
+          }
+
+          function TablesContent() {
+              let tableData = [
+                  {
+                      heading: 'Cars',
+                      items: [
+                          [2013, "A", "$32000"],
+                          [2011, "B", "$4400"],
+                          [2016, "B", "$15500"],
+                      ]
+                  },
+                  {
+                      heading: 'Trucks',
+                      items: [
+                          [2014, "D", "$18000"],
+                          [2013, "E", "$5200"],
+                      ]
+                  },
+                  {
+                      heading: 'Convertibles',
+                      items: [
+                          [2009, "A", "$2000"],
+                          [2010, "B", "$6000"],
+                          [2012, "B", "$12500"],
+                          [2017, "B", "$50000"],
+                      ]
+                  }
+              ]
+
+              return (
+                  <div>
+                      {
+                          tableData.map(tableDataItem => {
+                              return (
+                                  <div>
+                                      <HeadingTwo text={tableDataItem.heading} />
+                                      <TableList tds={tableDataItem.items} />
+                                  </div>
+                              )
+                          })
+                      }
+                  </div>
+              )
+          }
+
+          function TableList(props) {
+              return (
+                  <div>
+                      {
+                          props.tds.map(td => {
+                              return (
+                                  <ul>
+                                      <table className="table table-striped">
+                                          <thead>
+                                              <tr>
+                                                  <th style={{width:'25%'}}>Year</th>
+                                                  <th style={{width:'25%'}}>Model</th>
+                                                  <th style={{width:'25%'}}>Price</th>
+                                                  <th style={{width:'25%'}}>Buy</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  {
+                                                      td.map(tdItem => <td>{tdItem}</td>)
+                                                  }
+                                                  <td><button>Buy Now</button></td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </ul>
+                              )
+                          })
+                      }
+                  </div>
+              )
+          }
+
+          ReactDOM.render(
+              <TransportationApp />,
+              document.getElementById("root")
+          )
+      </script>
+  
+  </body>
+</html>
