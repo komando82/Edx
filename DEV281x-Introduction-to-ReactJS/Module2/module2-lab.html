@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <style rel="stylesheet">
+      li {list-style: none;}
+      li button {width: 100%; padding: 20px 0; font-size: 16px; color: blue;}
+      .btn-quiz {margin-bottom: 5px;}
+    </style>
+
+  </head>
+  <body>
+      <div id="root"></div>
+      <script type="text/babel">
+
+        class Quiz extends React.Component {
+
+          constructor(props) {
+            super(props);
+
+            this.questions = [
+              {
+                id: 1,
+                question: "What is ReactJS?",
+                answers: [
+                  "Shorthand for - REspectable ACTor Jason Statham",
+                  "A reaction to the phrase 'JUST SAYIN'",
+                  "React is front end library developed by Facebook.",
+                  "A peoples reaction to the Air Jordan Basketball shoes."
+                ],
+                correctAns: 3
+              },
+              {
+                id: 2,
+                question: "Why ReactJS is used?",
+                answers: [
+                  "I honestly don't know, Angular should be used instead.",
+                  "React is used to handle the view part of Web and Mobile applications.",
+                  "Because it is hard to learn and hard to implement.",
+                  "This is not funny - Neither of this."
+                ],
+                correctAns: 2
+              },
+              {
+                id: 3,
+                question: "Does ReactJS use HTML?",
+                answers: [
+                  "Hmmm, Could be YES and could be NO",
+                  "Hmmm, Could be NO and could be YES",
+                  "Does it really matter",
+                  "No, It uses JSX which is simiar to HTML",
+                ],
+                correctAns: 4
+              },
+              {
+                id: 4,
+                question: "When ReactJS released?",
+                answers: [
+                  "2013",
+                  "1913",
+                  "1991",
+                  "2024"
+                ],
+                correctAns: 1
+              },
+              {
+                id: 5,
+                question: "What is current stable version of ReactJS?",
+                answers: [
+                  ".164",
+                  "164",
+                  "16.4",
+                  "1.64"
+                ],
+                correctAns: 3
+              },
+              {
+                id: 6,
+                question: "What is Repository URL of ReactJS?",
+                answers: [
+                  "I will google it",
+                  "https://github.com/facebook/react",
+                  "Twitter.hashtagbullsh.com",
+                  "Facebook.sucks.com"
+                ],
+                correctAns: 2
+              },
+              {
+                id: 7,
+                question: "What are the life Cycle of ReactJS?",
+                answers: [
+                  "Ready - Stady - Go",
+                  "Engine start - First gear - Gas pedal - Second gear - break ...",
+                  "There are to many states",
+                  "Initialization - State/Property Updates - Destruction"
+                ],
+                correctAns: 4
+              },
+              {
+                id: 8,
+                question: "What are the feature of ReactJS?",
+                answers: [
+                  "JSX, Components, One direction flow",
+                  "React and JS",
+                  "One direction, Take that, Backstreet boys",
+                  "Click here if you want this stupid questions to end NOW !!!"
+                ],
+                correctAns: 1
+              },
+              {
+                id: 9,
+                question: "What are the Advantages of ReactJS?",
+                answers: [
+                  "All this underneath.",
+                  "React uses virtual DOM which is JavaScript object. This will improve apps performance.",
+                  "Component and Data patterns improve readability.",
+                  "Can be used with other framework also."
+                ],
+                correctAns: 1
+              },
+              {
+                id: 10,
+                question: "Was this Quiz fun?",
+                answers: [
+                  "Nooooo :-(",
+                  "Waste of my time",
+                  "Booring",
+                  "Wish I could skipped it"
+                ],
+                correctAns: 0
+              }
+            ]
+
+            this.state = {
+              currentQuestion: 0,
+              score: {
+                correct: 0,
+                incorrect: 0
+              }
+            }
+          }
+
+          selectAnswer = (question, index) => {
+            this.setState({
+              currentQuestion: this.state.currentQuestion + 1,
+              score: {
+                correct: (parseInt(index) === parseInt(question.correctAns) || parseInt(question.correctAns) === 0) ? this.state.score.correct + 1 : this.state.score.correct,
+                incorrect: (parseInt(index) !== parseInt(question.correctAns) && parseInt(question.correctAns) !== 0) ? this.state.score.incorrect + 1 : this.state.score.incorrect
+              }
+            })
+          }
+
+          resetState = () => {
+            this.setState({
+              currentQuestion: 0,
+              score: {
+                correct: 0,
+                incorrect: 0
+              }
+            })
+          }
+
+          render() {
+            return (
+              <div className="container">
+                <Question question={this.questions[this.state.currentQuestion]} resetState={this.resetState} />
+                <div className="row">
+                  {
+                    this.state.currentQuestion < this.questions.length 
+                      ? <Answers question={this.questions[this.state.currentQuestion]} selectAnswer={this.selectAnswer} />
+                      : null
+                  }
+                  <Score score={this.state.score} />
+                </div>
+              </div>
+            );
+          }
+        }
+
+        function Question(props) {
+          if (props.question) {
+            return (
+              <h2>Question {props.question.id} - {props.question.question}</h2>
+            )
+          } else {
+            return (
+              <div>
+                <h2>Quiz End</h2>
+                <button className="btn btn-primary" onClick={props.resetState}>Reset Quiz</button>
+              </div>
+            )
+          }
+        }
+
+        function Answers(props) {
+          return (
+            <div className="col-xs-12 col-sm-6">
+              <ul className="list-group">
+                {
+                  props.question.answers.map((answer, index) => {
+                    return (
+                      <li class="list-group-item">
+                        <button 
+                          onClick={() => props.selectAnswer(props.question, index + 1)}
+                          className="btn btn-lg btn-primary btn-quiz"
+                        >{answer}</button>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          );
+        }
+
+        function Score(props) {
+          return (
+            <div className="col-xs-12 col-sm-6">
+              <h4>Correct: {props.score.correct}</h4>
+              <h4>Incorrect: {props.score.incorrect}</h4>
+            </div>
+          );
+        }
+
+        ReactDOM.render(
+          <Quiz />,
+          document.getElementById('root')
+        )
+      </script>
+  
+  </body>
+</html>
