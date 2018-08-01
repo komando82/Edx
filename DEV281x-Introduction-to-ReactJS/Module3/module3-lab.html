@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <style rel="stylesheet">
+      .form-container { margin: 20px 0; }
+      .table th, .table td { vertical-align: middle; }
+    </style>
+
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      class App extends React.Component {
+        constructor() {
+          super()
+
+          this.state = {
+            inc: 0,
+            fName: '',
+            lName: '',
+            activity: 'Science Lab',
+            restrictions: {
+              a: false,
+              b: false,
+              c: false,
+            },
+            users: []
+          }
+        }
+
+        removeUser = (id) => {
+          let users = [...this.state.users]
+          users = users.filter( el => el.id !== id );
+
+          this.setState({ users: users })
+        }
+
+        formChange = (event, key) => {
+          this.setState({ [key]: event.target.value })
+        }
+
+        restrictionsChange = (event) => {
+          const newRestrictions = {...this.state.restrictions}
+          newRestrictions[event.target.value] = !newRestrictions[event.target.value]
+
+          this.setState({ restrictions: {...newRestrictions} })
+        }
+
+        formSubmit = (event) => {
+          event.preventDefault()
+
+          const user = {
+            id: this.state.inc,
+            firstName: this.state.fName,
+            lastName: this.state.lName,
+            activity: this.state.activity,
+            restrictions: this.parseRestrictions()
+          }
+
+          this.setState(prevState => ({
+            inc: prevState.inc + 1,
+            fName: '',
+            lName: '',
+            activity: 'Science Lab',
+            restrictions: { a: false, b: false, c: false },
+            users: [...prevState.users, user]
+          }))
+        }
+
+        parseRestrictions = () => {
+          const obj = {...this.state.restrictions};
+          const keys = Object.keys(obj);
+
+          return keys.filter(key => obj[key]);
+        }
+
+        render() {
+          return (
+            <div className="container">
+              <Form 
+                onChangeForm={this.formChange} 
+                onChangeRestrictions={this.restrictionsChange} 
+                onFormSubmit={this.formSubmit} 
+                {...this.state}
+              />
+              <Table 
+                users={this.state.users} 
+                onRemoveUser={this.removeUser} 
+              />
+            </div>
+          )
+        }
+      }
+
+      class Form extends React.Component {
+        render() {
+          const enableButton = this.props.fName && this.props.lName ? false : true
+
+          return (
+            <div className="row form-container">
+              <form className="col-md-6">
+
+                <Input id="fName" text="First name" onChangeInput={(event) => this.props.onChangeForm(event, 'fName')} value={this.props.fName} />
+                <Input id="lName" text="Last name" onChangeInput={(event) => this.props.onChangeForm(event, 'lName')} value={this.props.lName} />
+
+                <Select onChangeSelect={(event) => this.props.onChangeForm(event, 'activity')} selected={this.props.activity} />
+
+                <div>
+                  <label>Check all that apply: </label>
+                </div>
+
+                <div className="form-group">
+                  <Checkbox id="check1" text="a) Dietary Restrictions" value="a" onChangeCheckbox={(event) => this.props.onChangeRestrictions(event)} checked={this.props.restrictions.a} />
+                  <Checkbox id="check2" text="b) Physical Disabilities" value="b" onChangeCheckbox={(event) => this.props.onChangeRestrictions(event)} checked={this.props.restrictions.b} />
+                  <Checkbox id="check3" text="c) Medical Needs" value="c" onChangeCheckbox={(event) => this.props.onChangeRestrictions(event)} checked={this.props.restrictions.c} />
+                </div>
+
+                <button type="submit" className="btn btn-primary" onClick={this.props.onFormSubmit} disabled={enableButton}>Submit</button>
+
+              </form>
+            </div>
+          )
+        }
+      }
+
+      class Input extends React.Component {
+        render() {
+          return (
+            <div className="form-group">
+              <label htmlFor={this.props.id}>{this.props.text}</label>
+              <input type="text" className="form-control" id={this.props.id} placeholder={this.props.text} onChange={this.props.onChangeInput} value={this.props.value} />
+            </div>
+          )
+        }
+      }
+
+      class Select extends React.Component {
+        render() {
+          let options = ['Science Lab', 'Swimming', 'Cooking', 'Painting']
+
+          return (
+            <div className="form-group">
+              <label htmlFor="select1">Select Activity</label>
+              <select className="form-control" id="select1" onChange={this.props.onChangeSelect}>
+                {
+                  options.map((option, index) => <option key={index} value={option} selected={this.props.selected===option ? true : false}>{option}</option>)
+                }
+              </select>
+            </div>
+          )
+        }
+      }
+
+      class Checkbox extends React.Component {
+        render() {
+          return (
+            <div>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id={this.props.id} value={this.props.value} onChange={this.props.onChangeCheckbox} checked={this.props.checked} />
+                <label className="form-check-label" htmlFor={this.props.id}>{this.props.text}</label>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      class Table extends React.Component {
+        render() {
+          if (this.props.users.length === 0) {
+            return null
+          } else {
+            return (
+              <div className="row">
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Remove</th>
+                      <th scope="col">First Name</th>
+                      <th scope="col">Last Name</th>
+                      <th scope="col">Activity</th>
+                      <th scope="col">Restrictions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      this.props.users.map((user, index) => {
+                        return (
+                          <tr>
+                            <th scope="row"><button className="btn btn-primary" onClick={() => this.props.onRemoveUser(user.id)}>X</button></th>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.activity}</td>
+                            <td>{user.restrictions}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            )
+          }
+        }
+      }
+
+      ReactDOM.render(
+        <App/>,
+        document.getElementById('root')
+      );
+
+    </script>
+  
+  </body>
+</html>
