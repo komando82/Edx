@@ -46,7 +46,7 @@
         const input = document.createElement('INPUT')
         input.setAttribute('type', 'checkbox')
         input.setAttribute('id', `checkbox-id-${i}`)
-        input.addEventListener('click', () => updateUncheckedCountonCheck(this.checked))
+        input.addEventListener('click', () => updateUncheckedCountOnCheck(input.checked))
 
         // Create <label> HTML element,
         // add for to link it to input for better User Experience 
@@ -101,7 +101,7 @@
     }
 
     // update UncheckedCount value on input check/uncheck
-    function updateUncheckedCountonCheck(checked = true) {
+    function updateUncheckedCountOnCheck(checked = true) {
         if (checked) {
             uncheckedCount--
         } else {
